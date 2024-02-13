@@ -26,15 +26,24 @@ export async function POST(request: Request){
             //provide a prompt to the system 
                 //this is where we provide instructions 
             messages: [
-                { role: 'system', content: systemPrompt},
-                {role: 'user', content: [
-                    {type: 'image_url', image_url: image}
-                ]
-            }
+                { 
+                    role: 'system', 
+                    content: systemPrompt
+                },
+                {
+                    role: 'user', 
+                    content: [
+                        {
+                            type: 'image_url', 
+                            image_url: image
+                        }
+                    ]
+                },
             ],
         });
 
         return NextResponse.json(completion);
+        
     } catch (error) {
         console.log(error)
         return NextResponse.json('There was an Internal Server Error', {status: 500});
