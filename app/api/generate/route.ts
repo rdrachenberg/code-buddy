@@ -21,24 +21,23 @@ export async function POST(request: Request){
     
     try {    
         const completion = await openai.chat.completions.create({
-            model: 'gpt-4-vision-preview',
-            max_tokens: 4096,
+            model: 'gpt-4o-mini',
+            // max_tokens: 4096,
             //provide a prompt to the system 
                 //this is where we provide instructions 
             messages: [
-                { 
-                    role: 'system', 
-                    content: systemPrompt
-                },
                 {
-                    role: 'user', 
+                    role: "user",
                     content: [
-                        {
-                            type: 'image_url', 
-                            image_url: image
+                        { type: 'text', text: systemPrompt},
+                        { type: 'image_url', 
+                            image_url: {
+                                url: image,
+                                detail: 'auto'
+                            }
                         }
                     ]
-                },
+                }  
             ],
         });
 
